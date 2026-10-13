@@ -10,7 +10,7 @@
       "src": "https://github.com/carlos-algms/agentic.nvim"
     },
     "airtable.nvim": {
-      "rev": "fb8a29347977100c28a08e79b7e0e4e22b0636e0",
+      "rev": "1c81c9f7daf100ce8ef1c3ccd4bdfc9ad3659d5e",
       "src": "https://github.com/maxdlr/airtable.nvim",
       "version": "'main'"
     },
@@ -35,7 +35,7 @@
       "src": "https://github.com/moyiz/blink-emoji.nvim"
     },
     "blink-ripgrep.nvim": {
-      "rev": "911cce0b9a827196492e8d2229cb16a4c8a7d4cf",
+      "rev": "eea280cc38f5c0c1638949a793a8653e5e33dc9f",
       "src": "https://github.com/mikavilpas/blink-ripgrep.nvim"
     },
     "blink.cmp": {

@@ -5,7 +5,13 @@ local function ghPrNumber() return vim.fn.system('gh pr view --json number -q .n
 local function ghRepoName() return vim.fn.system('gh repo view --json nameWithOwner -q .nameWithOwner'):gsub('%s+$', '') end
 local function ghCurrentBranchName() return vim.fn.system('git rev-parse --abbrev-ref HEAD'):gsub('%s+$', '') end
 
-local openPrBuffer = function()
+local openPrBufferByNr = function(prNb)
+  local repo = ghRepoName()
+  local file = ('gh://%s/pr/%s'):format(repo, prNb)
+  vim.cmd.edit(file)
+end
+
+local openCurrentPrBuffer = function()
   local repo = ghRepoName()
   local prNb = ghPrNumber()
 
@@ -60,7 +66,7 @@ local createAutoPr = function()
     -- a pull request for branch "test-pr" into branch "master" already exists:
     if output:match 'already exists:' then
       vim.notify('PR already exists: ' .. ghPrNumber(), vim.log.levels.INFO, { title = 'GH PR Create' })
-      openPrBuffer()
+      openCurrentPrBuffer()
       return
     end
 
@@ -70,7 +76,7 @@ local createAutoPr = function()
 
   vim.notify(output, vim.log.levels.INFO, { title = 'GH PR Create' })
 
-  openPrBuffer()
+  openCurrentPrBuffer()
 end
 
 local prCmds = {
@@ -89,7 +95,17 @@ local prCmds = {
   {
     icon = '',
     label = 'View',
-    action = openPrBuffer,
+    action = openCurrentPrBuffer,
+    color = '#86B7FF',
+  },
+  {
+    icon = '',
+    label = 'Find pr',
+    action = function()
+      vim.ui.input({ prompt = 'Enter PR number: ' }, function(input)
+        if input and input ~= '' then openPrBufferByNr(input) end
+      end)
+    end,
     color = '#86B7FF',
   },
   {

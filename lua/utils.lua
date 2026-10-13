@@ -108,3 +108,37 @@ function Bezier_timing(x1, y1, x2, y2, total_ms)
     return math.max(1, math.floor(time_after - time_before + 0.5))
   end
 end
+
+---@param file string
+---@param size 'sm' | 'md' | 'lg'
+---@return nil
+function Open_file_in_float(file, size)
+  local size_map = {
+    sm = { height = 0.5, width = 0.5 },
+    md = { height = 0.7, width = 0.7 },
+    lg = { height = 0.9, width = 0.9 },
+  }
+
+  if file ~= vim.api.nvim_buf_get_name(0) then
+    Snacks.win {
+      file = file,
+      position = 'float',
+      backdrop = 60,
+      height = size_map[size].height,
+      width = size_map[size].width,
+      zindex = 50,
+      wo = {
+        spell = false,
+        wrap = true,
+        signcolumn = 'yes',
+        statuscolumn = ' ',
+        conceallevel = 3,
+        number = true,
+        relativenumber = true,
+      },
+      bo = {
+        bufhidden = 'hide',
+      },
+    }
+  end
+end

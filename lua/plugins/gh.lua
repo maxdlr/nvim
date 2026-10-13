@@ -23,28 +23,6 @@ local openCurrentPrBuffer = function()
   local file = ('gh://%s/pr/%s'):format(repo, prNb)
 
   vim.cmd.edit(file)
-  -- if file ~= vim.api.nvim_buf_get_name(0) then
-  --   Snacks.win {
-  --     file = file,
-  --     position = 'float',
-  --     backdrop = 60,
-  --     height = 0.9,
-  --     width = 0.9,
-  --     zindex = 50,
-  --     wo = {
-  --       spell = false,
-  --       wrap = true,
-  --       -- signcolumn = 'yes',
-  --       -- statuscolumn = ' ',
-  --       -- conceallevel = 3,
-  --       number = true,
-  --       relativenumber = true,
-  --     },
-  --     bo = {
-  --       bufhidden = 'hide',
-  --     },
-  --   }
-  -- end
 end
 
 local function ghLastCommitSubject() return vim.fn.system('git log -1 --pretty=%s'):gsub('%s+$', '') end
